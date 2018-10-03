@@ -1,27 +1,67 @@
-//AJAX Call for the IGDB API
-// $.ajax({
-//     url: "https://api-endpoint.igdb.com/games/?search=fifa 17&fields=*&limit=!",
-//     method: "GET",
-//     headers: {
-//     "user-key": "22d06d3a0ff901d9650f3de64e9a8e42",
-//     Accept: "application/json"
-//   }
-//   }).then(function(response) {
-//     console.log(response[2]);
-//   });
-
-
-//AJAX Call for GiantBomb API
+// AJAX Call for the IGDB API
 $.ajax({
-    url: "http://www.giantbomb.com/api/game/3030-4725/?api_key=[ee3742a57f440a418aa47f74420db3332c56ae4d]",
-    method: "GET"
+    url: "https://api-endpoint.igdb.com/games/?search=fifa 17&fields=*&limit=1",
+    method: "GET",
+    headers: {
+    "user-key": "22d06d3a0ff901d9650f3de64e9a8e42",
+    Accept: "application/json",
+    'Access-Control-Allow-Origin': 'https://enguyen93.github.io/AsideProject/'
+  }
   }).then(function(response) {
     console.log(response);
   });
 
+  
+  //CORS with igdb api req
+//   $.ajax({
+//     type: 'GET',
+//     url: "https://api-endpoint.igdb.com/games/?search=fifa 17&fields=*&limit=!",
+//     contentType: 'text/plain',
+//     xhrFields: {
+//       withCredentials: false
+//     },
+//     headers: {
+//       'Access-Control-Allow-Origin': true,
+//       "user-key": "22d06d3a0ff901d9650f3de64e9a8e42",
+//       Accept: "application/json"
+//     }, 
+//     success: function(response) {
+//       console.log(response);
+//     },  
+//     error: function() {
+//     }
+//   });
 
 
 
+
+// AJAX Call for GiantBomb API
+// $.ajax({
+//     url: "http://www.giantbomb.com/api/game/3030-4725/?api_key=[ee3742a57f440a418aa47f74420db3332c56ae4d]",
+//     method: "GET",
+//     'Access-Control-Allow-Origin': '*'
+//   }).then(function(response) {
+//     console.log(response);
+//   });
+
+
+//cors with giantbomb api req
+//   $.ajax({
+//     type: 'GET',
+//     url: "http://www.giantbomb.com/api/game/3030-4725/?api_key=[ee3742a57f440a418aa47f74420db3332c56ae4d]",
+//     contentType: 'text/plain',
+//     xhrFields: {
+//       withCredentials: false
+//     },
+//     headers: {
+//       'Access-Control-Allow-Origin': true
+//     }, 
+//     success: function(response) {
+//       console.log(response);
+//     },  
+//     error: function() {
+//     }
+//   });
 
 
 
