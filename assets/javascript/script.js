@@ -1,3 +1,35 @@
+//AJAX Call for the IGDB API
+// $.ajax({
+//     url: "https://api-endpoint.igdb.com/games/?search=fifa 17&fields=*&limit=!",
+//     method: "GET",
+//     headers: {
+//     "user-key": "22d06d3a0ff901d9650f3de64e9a8e42",
+//     Accept: "application/json"
+//   }
+//   }).then(function(response) {
+//     console.log(response[2]);
+//   });
+
+
+//AJAX Call for GiantBomb API
+$.ajax({
+    url: "http://www.giantbomb.com/api/game/3030-4725/?api_key=[ee3742a57f440a418aa47f74420db3332c56ae4d]",
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
+  });
+
+
+
+
+
+
+
+
+
+
+
+
 //Testing and figuring out how the AJAX call for the twitch API works
 //If it errors 400, check Client ID(update)
 
@@ -13,8 +45,15 @@ $("#test-Btn").on("click", function () {
             "Accept": "application/vnd.twitchtv.v5+json"
         },
     }).then(function (response) {
-        console.log(response);
+        $("#twitch-embed").empty();
+        console.log(response.streams[0].channel.display_name)
+        var twitchDisplayName = response.streams[0].channel.display_name;
+        new Twitch.Embed("twitch-embed", {
+            width: 854,
+            height: 480,
+            channel: twitchDisplayName //search input goes here
+        });
+        
     });
 
 })
-
