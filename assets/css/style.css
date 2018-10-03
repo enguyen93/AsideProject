@@ -1,0 +1,50 @@
+ #searchHolder, #testsearch{
+    width: 50%;
+    text-align: center;
+}
+label {
+    margin-top: 100px;
+    text-align: center;
+    font-size: -webkit-xxx-large;
+    color: lightyellow;
+}
+#carouselExampleFade{
+    position: relative;
+}
+.carousel-inner{
+    height:500px;
+}
+div.form-group {
+    position:absolute;
+    z-index:9999999;
+    top:20px; /* change to whatever you want */
+    left: 17%; 
+    justify-content: center;
+    text-align: center;
+}
+#twitch-embed{
+    float: right;
+    width: 50%;
+}
+.gameStuffs{
+    float: left;
+    width: 50%;
+}
+#submit-Btn{
+    position: relative;
+}
+#searchHolder{
+    position: relative;
+    cursor: pointer;
+}
+#testsearch {
+    position: relative;
+    align-content: center;
+    left: 296px;
+}
+.bottomHalf{
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+}

@@ -1,77 +1,8 @@
-// AJAX Call for the IGDB API
-$.ajax({
-    url: "https://api-endpoint.igdb.com/games/?search=fifa 17&fields=*&limit=1",
-    method: "GET",
-    headers: {
-    "user-key": "22d06d3a0ff901d9650f3de64e9a8e42",
-    Accept: "application/json",
-    'Access-Control-Allow-Origin': 'https://enguyen93.github.io/AsideProject/'
-  }
-  }).then(function(response) {
-    console.log(response);
-  });
-
-  
-  //CORS with igdb api req
-//   $.ajax({
-//     type: 'GET',
-//     url: "https://api-endpoint.igdb.com/games/?search=fifa 17&fields=*&limit=!",
-//     contentType: 'text/plain',
-//     xhrFields: {
-//       withCredentials: false
-//     },
-//     headers: {
-//       'Access-Control-Allow-Origin': true,
-//       "user-key": "22d06d3a0ff901d9650f3de64e9a8e42",
-//       Accept: "application/json"
-//     }, 
-//     success: function(response) {
-//       console.log(response);
-//     },  
-//     error: function() {
-//     }
-//   });
-
-
-
-
-// AJAX Call for GiantBomb API
-// $.ajax({
-//     url: "http://www.giantbomb.com/api/game/3030-4725/?api_key=[ee3742a57f440a418aa47f74420db3332c56ae4d]",
-//     method: "GET",
-//     'Access-Control-Allow-Origin': '*'
-//   }).then(function(response) {
-//     console.log(response);
-//   });
-
-
-//cors with giantbomb api req
-//   $.ajax({
-//     type: 'GET',
-//     url: "http://www.giantbomb.com/api/game/3030-4725/?api_key=[ee3742a57f440a418aa47f74420db3332c56ae4d]",
-//     contentType: 'text/plain',
-//     xhrFields: {
-//       withCredentials: false
-//     },
-//     headers: {
-//       'Access-Control-Allow-Origin': true
-//     }, 
-//     success: function(response) {
-//       console.log(response);
-//     },  
-//     error: function() {
-//     }
-//   });
-
-
-
-
-
-
-
-
-//Testing and figuring out how the AJAX call for the twitch API works
-//If it errors 400, check Client ID(update)
+jQuery.ajaxPrefilter(function (options) {
+    if (options.crossDomain && jQuery.support.cors) {
+        options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+    }
+});
 
 $("#test-Btn").on("click", function () {
     event.preventDefault();
@@ -93,7 +24,58 @@ $("#test-Btn").on("click", function () {
             height: 480,
             channel: twitchDisplayName //search input goes here
         });
-        
+    });
+})
+
+// AJAX Call for GiantBomb API
+$("#test-Btn").on("click", function () {
+    event.preventDefault();
+    var input = $("#testsearch").val().trim();
+    $.ajax({
+        url: "https://api-endpoint.igdb.com/games/?search=" + input + "&fields=*&limit=1",
+        method: "GET",
+        headers: {
+            "user-key": "64bac0cd3f7f63493f86d418dc5f3363",
+            Accept: "application/json"
+        }
+    }).then(function (response) {
+        $("#testsearch").val("");
+        $("#gameNameHolder").empty();
+        $("#gameCover").empty();
+        $("#gameRating").empty();
+        $("#gameSummary").empty();
+        var gameName = $("<p>");
+        //Line Associated with the Image
+
+        picUrl = response[0].cover.url;
+        var gamePic = $("<img>").attr("src", picUrl);
+
+        var gameRatingJS = $("<p>");
+        var gameSummaryJS = $("<p>");
+
+        //Line Associated with the Image
+        gamePic.css({"width": "200px", "height": "200px", "border-radius": "12px"});
+
+        gameName.html(response[0].name);
+        gameName.css({"font-size": "200%"});
+        gameRatingJS.html(response[0].total_rating);
+        gameRatingJS.css({"font-size": "250%"});
+        gameSummaryJS.html(response[0].summary);
+        number = response[0].total_rating;
+        newNumber = Math.round(number);
+        $("#gameNameHolder").append(gameName);
+
+        //Line Associated with the Image
+        $("#gameCover").append(gamePic);
+
+        $("#gameRating").append("Rating out of 100: " + newNumber);
+        $("#gameSummary").append(gameSummaryJS);
+        console.log(response);
+        console.log(response[0].name);
+        console.log(response[0].cover.url);
+        console.log(response[0].total_rating);
+        console.log(response[0].summary);
     });
 
 })
+
