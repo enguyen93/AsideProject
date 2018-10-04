@@ -38,44 +38,54 @@ $("#test-Btn").on("click", function () {
             "user-key": "64bac0cd3f7f63493f86d418dc5f3363",
             Accept: "application/json"
         }
+        //Lines below empty out the Holders on a new search, so that things don't stack
+        //This way we don't get more than 1 twitch stream at a time, taking up too many resources
     }).then(function (response) {
         $("#testsearch").val("");
         $("#gameNameHolder").empty();
         $("#gameCover").empty();
         $("#gameRating").empty();
         $("#gameSummary").empty();
+        //Creating new Divs to store things in
         var gameName = $("<p>");
-        //Line Associated with the Image
-
         picUrl = response[0].cover.url;
         var gamePic = $("<img>").attr("src", picUrl);
-
         var gameRatingJS = $("<p>");
+        //variable to make the bar
+        var makeProgress = $("#barHolder").addClass("progress");
         var gameSummaryJS = $("<p>");
-
-        //Line Associated with the Image
-        gamePic.css({"width": "200px", "height": "200px", "border-radius": "12px"});
-
-        gameName.html(response[0].name);
-        gameName.css({"font-size": "200%"});
-        gameRatingJS.html(response[0].total_rating);
-        gameRatingJS.css({"font-size": "250%"});
-        gameSummaryJS.html(response[0].summary);
         number = response[0].total_rating;
-        newNumber = Math.round(number);
+        newNumber = Math.round(number); 
+
+        //Dynamically creating a bootstrap progress bar
+        makeProgress.addClass("progress-bar progress-bar-striped progress-bar-animated");
+        makeProgress.attr("role", "progressbar");
+        makeProgress.attr("aria-valuenow", newNumber);
+        makeProgress.attr("aria-valuemin", "0");
+        makeProgress.attr("aria-valuemax", "100");
+        makeProgress.css({"width": "75%"});
+        //Styling the Divs and storing the content inside them
+        gamePic.css({"width": "200px", "height": "200px", "border-radius": "12px"});
+        gameName.html(response[0].name);
+        gameName.css({"font-size": "200%", "font-weight": "bold"});
+        gameRatingJS.html(response[0].total_rating);
+        gameSummaryJS.html(response[0].summary);
+        $("#gameRating").css({"font-size": "175%"});
+        $("#gameSummary").css({"font-size": "105%", "font-weight": "bold"});
+        //Appending them to make them show up
         $("#gameNameHolder").append(gameName);
-
-        //Line Associated with the Image
         $("#gameCover").append(gamePic);
-
         $("#gameRating").append("Rating out of 100: " + newNumber);
+        $("#barholder").append(makeProgress);
         $("#gameSummary").append(gameSummaryJS);
+
+        //test
         console.log(response);
         console.log(response[0].name);
         console.log(response[0].cover.url);
         console.log(response[0].total_rating);
         console.log(response[0].summary);
     });
-
 })
 
+//For some reason, the Img url does NOT work locally, but it does work on the github pages io link
