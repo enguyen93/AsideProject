@@ -48,7 +48,22 @@ div.form-group {
     justify-content: center;
     width: 100%;
 }
+#imageHolder{
+    display: flex;
+}
 #gameCover{
+    flex: 1;
+    margin-left: 8px;
 }
 #heartHolder{
+    flex: auto;
+    margin-right: 7%;
+}
+#heartCSS{
+    cursor: pointer;
+}
+#peopleHolder{
+    font-size: 105%;
+    font-weight: bold;
+    margin-top: 5%;
 }
